@@ -6,13 +6,17 @@ It expect a data-only-container to be present on the host with name rancher-data
 
 ## How to install it
 
-You must have  Docker and Docker compose installed on your host.
+You must have Docker and Docker compose installed on your host.
+
+It expects a data-only-container to be present on the host with name rancher-data as described in the [rancher upgrade guide](http://docs.rancher.com/rancher/upgrading/).
 
 ```
 # git clone https://github.com/eea/eea.docker.rancher
 # cd eea.docker.rancher
 # docker-compose up -d
 ```
+
+Go to http://<yourhost>:8080/ to view the Rancher server UI.
 
 ## Upgrades
 
@@ -25,7 +29,6 @@ For supsequent upgrades you just need to pull the new image and bump up the vers
 # vi docker-compose.yml # bump-up the version and save
 # docker-compose up -d
 ```
-
 
 ## Troubleshooting
 
