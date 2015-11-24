@@ -16,7 +16,7 @@ It expects a data-only-container to be present on the host with name rancher-dat
 # docker-compose up -d
 ```
 
-Go to http://<yourhost>:8080/ to view the Rancher server UI.
+Go to http://yourhost:8080/ to view the Rancher server UI.
 
 ## Upgrades
 
