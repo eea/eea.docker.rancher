@@ -1,5 +1,16 @@
-#nginx:
-# to add nginx proxy with ssl termination
+nginx:
+    restart: always
+    image: nginx:1.8.1
+    ports:
+        - "80:80"
+        - "443:443"
+    volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./nginx/conf.d:/etc/nginx/conf.d:ro
+        - ./html:/usr/share/nginx/html:ro
+        - ./nginx/tls:/etc/nginx/tls:ro
+    links:
+        - server
 
 server:
     image: rancher/server:v1.0.0
@@ -27,3 +38,4 @@ rancher-data:
 #    log_driver: "gelf"
 #    log_opt:
 #       address: "udp://swarm01-eeasites.eea.europa.eu:12201"
+

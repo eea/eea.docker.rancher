@@ -1,0 +1,43 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:100);
+.err404 {
+  background:  url(/static_errors/ice.gif) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.err50x {
+  background:  url(/static_errors/retrocars.gif) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.err50xmaintenance {
+  background:  url(/static_errors/containers.gif) no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1{
+  font-size: 4em;
+}
+h2{
+  font-size: 2em;
+}
+
+body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+img.eealogo {
+    float:right;
+    padding:1em;
+    width: 30%;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: rgba(255,255,255, 0.9);
+  text-align: center;
+}
+
