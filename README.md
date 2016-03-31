@@ -16,7 +16,7 @@ Before starting the server you must add the secret key file named "server-eea.ke
 # docker-compose up -d
 ```
 
-Go to http://yourhost:8080/ to view the Rancher server UI.
+Go to http://yourhost/ to view the Rancher server UI.
 
 ## Where is the data?
 
