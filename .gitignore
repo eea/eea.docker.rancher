@@ -1,3 +1,4 @@
 *.key
 .secret
 *.secret
+db_backup*

@@ -29,11 +29,19 @@ rancher-data:
     volumes:
        - /var/lib/mysql
 
-# MYSQL backup service
-#
-# docker run -d --restart=always -e DB_DUMP_FREQ=2 -e DB_DUMP_BEGIN=+0 -e DB_DUMP_TARGET=/db -e DB_DUMP_DEBUG=true \ 
-#    --link eeadockerrancher_server_1:db -v /var/local/deploy/mysql-backup:/db deitch/mysql-backup 
+mysql-backup:
+    image: deitch/mysql-backup:0.7.0
+    restart: always
+    environment:
+        - DB_DUMP_FREQ=360
+        - DB_DUMP_BEGIN=+0
+        - DB_DUMP_TARGET=/db
+    links:
+        - server:db
+    volumes:
+        - ./mysql-backup:/db
 
+# TOADD enable logging to graylog
 # following works only with docker-compose 1.5 or newer
 #    log_driver: "gelf"
 #    log_opt:
