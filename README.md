@@ -8,7 +8,7 @@ It expect a data-only-container to be present on the host with name rancher-data
 
 You must have Docker and Docker compose installed on your host.
 
-It expects a data-only-container to be present on the host with name rancher-data as described in the [rancher upgrade guide](http://docs.rancher.com/rancher/upgrading/).
+Before starting the server you must add the secret key file named "server-eea.key" under the bind-mounted directory ./ngnix/tls. This adds SSL termination in nginx in front of Rancher [as descirbed in docs](http://docs.rancher.com/rancher/installing-rancher/installing-server/basic-ssl-config/).
 
 ```
 # git clone https://github.com/eea/eea.docker.rancher
@@ -17,6 +17,12 @@ It expects a data-only-container to be present on the host with name rancher-dat
 ```
 
 Go to http://yourhost:8080/ to view the Rancher server UI.
+
+## Where is the data?
+
+Rancher uses mysql to store all Rancher metadata and settings. In the docker-compose file you can see that we use a data-only-container (busybox) to store the mysql data.
+
+We also have a mysql-backup service which will automatically do mysql dumps at certain intervals specified via environment variables. See the [original docker image deitch/mysql-backup/](https://hub.docker.com/r/deitch/mysql-backup/) for more info. The dumps are stored under ./mysql-backup.
 
 ## Upgrades
 
