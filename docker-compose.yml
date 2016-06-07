@@ -13,7 +13,7 @@ nginx:
         - server
 
 server:
-    image: rancher/server:v1.0.0
+    image: rancher/server:v1.0.2
     restart: always
     environment:
         - JAVA_OPTS=-Xmx4096m

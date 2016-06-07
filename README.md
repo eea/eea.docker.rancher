@@ -38,20 +38,4 @@ For supsequent upgrades you just need to pull the new image and bump up the vers
 
 ## Troubleshooting
 
-### Where can I find the detailed logs of the rancher server container?
-
-Running docker logs on the Rancher server container will provide a set of the basic logs. To get more detailed logs, you can exec into the rancher server container and look at the log files.
-
-Exec into the server container
-```
-$ docker exec -it <server_container_id> bash
-```
-
-Navigate to the location of the cattle logs
-```
-$ cd /var/lib/cattle/logs/
-$ cat cattle-debug.log
-```
-Inside this folder, there will be cattle-debug.log and cattle-error.log. If you have been using Rancher server for many days, you will find a log file for each day as we create a new file for each day.
-
 See more on [official page](http://docs.rancher.com/rancher/faqs/troubleshooting/)
