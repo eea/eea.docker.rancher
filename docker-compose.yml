@@ -13,7 +13,7 @@ nginx:
         - server
 
 server:
-    image: rancher/server:v1.0.2
+    image: rancher/server:v1.1.0
     restart: always
     environment:
         - JAVA_OPTS=-Xmx4096m
@@ -31,8 +31,8 @@ mysql-backup:
     image: deitch/mysql-backup:0.7.0
     restart: always
     environment:
-        - DB_DUMP_FREQ=360
-        - DB_DUMP_BEGIN=+0
+        - DB_DUMP_FREQ=1440
+        - DB_DUMP_BEGIN=2330
         - DB_DUMP_TARGET=/db
     links:
         - server:db
