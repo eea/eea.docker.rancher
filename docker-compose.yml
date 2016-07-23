@@ -25,15 +25,13 @@ server:
     restart: always
     environment:
         - JAVA_OPTS=-Xmx4096m
-#   env_file: dbsecrets.env
+    env_file: dbsecrets.env
 
     volumes:
         - /etc/localtime:/etc/localtime:ro
-        - rancher-mysql-data:/var/lib/mysql
         - rancher-cattle-data:/var/lib/cattle
-        - rancher-mysql-logs:/var/log/mysql
-#   links:
-#       - dbservice:dbservice
+    links:
+        - dbservice:dbservice
 
 mysql-backup:
     image: deitch/mysql-backup:0.7.0
@@ -43,7 +41,7 @@ mysql-backup:
         - DB_DUMP_BEGIN=2330
         - DB_DUMP_TARGET=/db
     links:
-        - server:db
+        - dbservice:db
     volumes:
         - ./mysql-backup:/db
 
@@ -76,5 +74,6 @@ dbservice:
         - --myisam_recover_options=BACKUP
         - --thread_cache_size=8
     volumes:
-        - test-mysql-data:/var/lib/mysql
+        - rancher-mysql-data:/var/lib/mysql
+        - rancher-mysql-logs:/var/log/mysql
 
