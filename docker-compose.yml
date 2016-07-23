@@ -25,11 +25,15 @@ server:
     restart: always
     environment:
         - JAVA_OPTS=-Xmx4096m
+#   env_file: dbsecrets.env
+
     volumes:
         - /etc/localtime:/etc/localtime:ro
         - rancher-mysql-data:/var/lib/mysql
         - rancher-cattle-data:/var/lib/cattle
         - rancher-mysql-logs:/var/log/mysql
+#   links:
+#       - dbservice:dbservice
 
 mysql-backup:
     image: deitch/mysql-backup:0.7.0
@@ -49,20 +53,28 @@ mysql-backup:
 #    log_opt:
 #       address: "udp://swarm01-eeasites.eea.europa.eu:12201"
 
-#dbservice:
-#    image: mysql:5.5.50
-#    restart: always
-#    environment:
-#        - MYSQL_ROOT_PASSWORD=forgedaboutit
-#    command:
-#        - mysqld
-#        - --key_buffer_size=16M
-#        - --max_allowed_packet=16M
-#        - --max_connections=1000
-#        - --sql_mode=ONLY_FULL_GROUP_BY
-#        - --query_cache_limit=1M
-#        - --query_cache_size=16M
-#        - --innodb_buffer_pool_size=2GB
-#    volumes:
-#        - rancher-mysql-data:/var/lib/mysql
+#
+# DB service. Created, but unused.
+#
+dbservice:
+    image: mysql:5.5.50
+    restart: always
+    environment:
+        - TZ=Europe/Copenhagen
+    env_file: mysqlsecrets.env
+    command:
+        - mysqld
+        - --key_buffer_size=16M
+        - --max_allowed_packet=16M
+        - --max_connections=1000
+        - --sql_mode=ONLY_FULL_GROUP_BY
+        - --query_cache_limit=1M
+        - --query_cache_size=16M
+        - --innodb_buffer_pool_size=2GB
+        - --log_error=/var/log/mysql/error.log
+        - --expire_logs_days=2
+        - --myisam_recover_options=BACKUP
+        - --thread_cache_size=8
+    volumes:
+        - test-mysql-data:/var/lib/mysql
 
