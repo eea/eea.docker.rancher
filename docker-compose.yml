@@ -55,7 +55,7 @@ mysql-backup:
 #       address: "udp://swarm01-eeasites.eea.europa.eu:12201"
 
 #
-# DB service. Created, but unused.
+# DB service.
 #
 dbservice:
     image: mysql:5.5.50

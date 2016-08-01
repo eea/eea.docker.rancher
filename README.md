@@ -2,7 +2,7 @@
 
 This repo includes the docker-compose orchestration for deployment of a [Rancher server](https://github.com/rancher/rancher/) in [a single node setup](http://docs.rancher.com/rancher/installing-rancher/installing-server/).
 
-It expect a data-only-container to be present on the host with name rancher-data as described in the [rancher upgrade guide](http://docs.rancher.com/rancher/upgrading/).
+It uses an external mysql service with named volumes.
 
 ## How to install it
 
@@ -13,6 +13,22 @@ Before starting the server you must add the secret key file named "server-eea.ke
 ```
 # git clone https://github.com/eea/eea.docker.rancher
 # cd eea.docker.rancher
+```
+
+Configure the secrets
+
+```
+# cp dbsecrets.env-dist dbsecrets.env
+# vi dbsecrets.env
+# cp mysqlsecrets.env-dist mysqlsecrets.env
+# vi mysqlsecrets.env
+```
+
+Start the mysql server and setup the rancher cattle DB as described in [rancher with external database](http://docs.rancher.com/rancher/latest/en/installing-rancher/installing-server/#using-an-external-database). Close the mysql service.
+
+Than finally run the full stack:
+
+```
 # docker-compose up -d
 ```
 
@@ -20,21 +36,21 @@ Go to http://yourhost/ to view the Rancher server UI.
 
 ## Where is the data?
 
-Rancher uses mysql to store all Rancher metadata and settings. In the docker-compose file you can see that we use a data-only-container (busybox) to store the mysql data.
+Rancher uses mysql to store all Rancher metadata and settings. In the docker-compose file you can see that we store the data in a named volume.
 
 We also have a mysql-backup service which will automatically do mysql dumps at certain intervals specified via environment variables. See the [original docker image deitch/mysql-backup/](https://hub.docker.com/r/deitch/mysql-backup/) for more info. The dumps are stored under ./mysql-backup.
 
 ## Upgrades
 
-First of all make sure on the first upgrade you have a data-only-container where the rancher mysql data is stored. See the [rancher official upgrade documentation](http://docs.rancher.com/rancher/upgrading/).
-
-For supsequent upgrades you just need to pull the new image and bump up the version in the docker-compose.yml file and restart, in the example below we use v0.46.0.
+For supsequent upgrades you just need to pull the new image and bump up the version in the docker-compose.yml file and restart, in the example below we use v1.1.0.
 
 ```
-# docker pull rancher/server:v0.46.0
+# docker pull rancher/server:v1.1.0
 # vi docker-compose.yml # bump-up the version and save
 # docker-compose up -d
 ```
+
+See the [rancher official upgrade documentation](http://docs.rancher.com/rancher/upgrading/).
 
 ## Troubleshooting
 
