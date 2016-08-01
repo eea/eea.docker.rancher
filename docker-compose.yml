@@ -25,6 +25,9 @@ server:
     restart: always
     environment:
         - JAVA_OPTS=-Xmx4096m
+        - CATTLE_DB_CATTLE_MYSQL_HOST=dbservice
+        - CATTLE_DB_CATTLE_MYSQL_PORT=3306
+        - CATTLE_DB_CATTLE_MYSQL_NAME=cattle
     env_file: dbsecrets.env
 
     volumes:
