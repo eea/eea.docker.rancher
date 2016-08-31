@@ -71,11 +71,14 @@ dbservice:
         - --sql_mode=ONLY_FULL_GROUP_BY
         - --query_cache_limit=1M
         - --query_cache_size=16M
-        - --innodb_buffer_pool_size=2GB
+        - --query_cache_type=0
+        - --innodb_buffer_pool_size=3GB
+        - --innodb_buffer_pool_instances=2
         - --log_error=/var/log/mysql/error.log
         - --expire_logs_days=2
         - --myisam_recover_options=BACKUP
-        - --thread_cache_size=8
+        - --thread_cache_size=10
+        - --table_open_cache=600
     volumes:
         - rancher-mysql-data:/var/lib/mysql
         - rancher-mysql-logs:/var/log/mysql
