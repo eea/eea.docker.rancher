@@ -1,5 +1,7 @@
 # EEA Rancher server
 
+**DEPRECATION NOTE**: This github repo is for example deployments only and will not be updated anymore. The production deployment files are in EEASVN see [eea internal wiki](https://taskman.eionet.europa.eu/projects/infrastructure/wiki/Rancher).
+
 This repo includes the docker-compose orchestration for deployment of a [Rancher server](https://github.com/rancher/rancher/) in [a single node setup](http://docs.rancher.com/rancher/installing-rancher/installing-server/).
 
 It uses an external mysql service with named volumes.
